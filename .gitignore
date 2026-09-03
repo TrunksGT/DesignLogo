@@ -1,0 +1,16 @@
+# 여기에는 **키가 절대 들어오면 안 된다.**
+# 이 저장소는 공개될 수 있다. 한 번 올라간 키는 히스토리에 영원히 남는다.
+config.json
+*.key
+*.pem
+*.env
+.env*
+*secret*
+*token*
+*credential*
+
+# 만들어지는 것 — 소스는 J:\design-gen 에 있다
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

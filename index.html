@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="ko"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>로고 · 명함 디자인</title>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard-dynamic-subset.css">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#F4F2ED; --raise:#FBFAF7;
+  --text:#17171A; --muted:#6B6760; --muted2:#98938A;
+  --line:rgba(23,23,26,.14); --line-soft:rgba(23,23,26,.07);
+  --fill:rgba(23,23,26,.035); --nav:74px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);
+  font-family:Pretendard,"Pretendard Variable","Noto Sans KR",Inter,
+    ui-sans-serif,system-ui,"Malgun Gothic",sans-serif;
+  line-height:1.7;-webkit-font-smoothing:antialiased;
+  font-feature-settings:"tnum" 1}
+a{color:inherit;text-decoration:none}
+.inner{width:min(1180px,calc(100vw - 40px));margin:0 auto}
+section,header{scroll-margin-top:calc(var(--nav) + 18px)}
+
+.nav{position:fixed;inset:0 0 auto 0;height:var(--nav);z-index:20;
+  display:flex;align-items:center;
+  background:linear-gradient(var(--bg) 62%,rgba(244,242,237,0))}
+.nav .inner{display:flex;align-items:center;justify-content:space-between}
+.nav .mark{font-size:14.5px;font-weight:700;letter-spacing:-.03em}
+.nav ul{display:flex;gap:24px;list-style:none}
+.nav a{font-size:14px;color:var(--muted2);transition:color .16s}
+.nav a:hover,.nav a.on{color:var(--text);font-weight:700}
+
+/* 참고 사이트에서 가져온 것 — 히어로를 **가운데로 세우고**, 핵심 어구에
+   먹 블록을 깐다. 그쪽은 검은 판에 흰 블록이었다. 우리는 종이 판이라
+   반대로 먹 블록에 흰 글씨다. 판 색이 바뀌면 블록 색도 뒤집어야 한다. */
+.hero{padding:calc(var(--nav) + 96px) 0 40px;text-align:center}
+.hero h1{font-size:clamp(33px,5.6vw,62px);line-height:1.24;font-weight:800;
+  letter-spacing:-.045em;word-break:keep-all}
+.hi{background:var(--text);color:var(--bg);padding:.02em .22em;
+  border-radius:2px;box-decoration-break:clone;
+  -webkit-box-decoration-break:clone}
+.hero p{margin:22px auto 0;color:var(--muted);font-size:16.5px;max-width:44ch;
+  word-break:keep-all}
+.acts{display:flex;gap:9px;margin-top:32px;flex-wrap:wrap;
+  justify-content:center}
+.hero .fine{margin-left:auto;margin-right:auto}
+
+/* 아래 화살표 — 스크롤이 더 있다고 알린다. 참고 사이트가 그랬다. */
+.chev{display:block;margin:38px auto 0;width:26px;height:26px;opacity:.4;
+  animation:bob 2.2s ease-in-out infinite}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+
+/* 파는 것 세 칸. 참고 사이트의 '역량 3칸' 자리다.
+   ⚠ 그쪽은 구직이라 능력을 적었지만 우리는 **파는 것과 값**을 적는다.
+     판매 사이트인데 값이 어디에도 없던 것이 가장 큰 구멍이었다. */
+.sell{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--line-soft);border-block:1px solid var(--line-soft);
+  margin-top:12px}
+.sell > div{background:var(--bg);padding:30px 26px 32px}
+.sell b{display:block;font-size:17px;font-weight:700;letter-spacing:-.03em}
+.sell .won{margin-top:10px;font-size:26px;font-weight:800;
+  letter-spacing:-.045em;font-feature-settings:"tnum" 1}
+.sell .won small{font-size:13px;font-weight:500;color:var(--muted2);
+  margin-left:3px;letter-spacing:0}
+.sell p{margin-top:9px;color:var(--muted);font-size:13.5px;word-break:keep-all}
+.sell .when{margin-top:14px;font-size:12.5px;color:var(--muted2)}
+@media(max-width:760px){.sell{grid-template-columns:1fr}}
+
+/* 업종 태그. 참고 사이트의 해시태그 줄. 손님이 자기 업종을 찾는 자리다. */
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px;
+  justify-content:center}
+.tags span{font-size:12.5px;color:var(--muted2);padding:4px 10px;
+  border:1px solid var(--line-soft);border-radius:999px}
+
+/* 스크롤 진입 — 이게 참고 사이트의 '느낌' 절반이다.
+   ⚠ `prefers-reduced-motion` 을 지킨다. 움직임에 멀미하는 사람이 있고,
+     그 설정을 켠 사람에게는 애니메이션이 방해가 아니라 장애가 된다. */
+.rv{opacity:0;transform:translateY(18px);
+  transition:opacity .62s cubic-bezier(.22,.61,.36,1),
+             transform .62s cubic-bezier(.22,.61,.36,1)}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  .chev{animation:none}
+}
+.act{padding:11px 23px;border-radius:999px;border:1px solid var(--line);
+  background:transparent;font-size:14.5px;transition:.16s}
+.act:hover{background:var(--fill)}
+.act.on{background:var(--text);color:var(--bg);border-color:var(--text);
+  font-weight:700}
+.hero .fine{margin-top:54px;color:var(--muted2);font-size:12.5px;max-width:62ch;
+  word-break:keep-all}
+
+.sec{padding:74px 0}
+.sec h2{font-size:clamp(24px,2.4vw,30px);font-weight:800;letter-spacing:-.04em}
+.sec .lead{color:var(--muted);font-size:14.5px;margin-top:6px;
+  word-break:keep-all}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-top:22px}
+.f{padding:7px 16px;border-radius:999px;border:1px solid var(--line);
+  background:transparent;color:var(--muted);font:inherit;font-size:13px;
+  cursor:pointer;transition:.16s;white-space:nowrap}
+.f:hover{background:var(--fill);color:var(--text)}
+.f[aria-pressed="true"]{background:var(--text);color:var(--bg);
+  border-color:var(--text);font-weight:700}
+
+.grid{display:grid;gap:26px 22px;margin-top:30px;
+  grid-template-columns:repeat(auto-fill,minmax(232px,1fr))}
+.cell{background:none;border:0;padding:0;text-align:left;cursor:pointer;
+  font:inherit;color:inherit}
+.cell .pic{background:var(--raise);border:1px solid var(--line-soft);
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  padding:16px;transition:border-color .16s;overflow:hidden}
+.cell:hover .pic{border-color:var(--line)}
+.cell img{max-width:100%;max-height:100%;display:block}
+.cell b{display:block;margin-top:11px;font-size:14px;font-weight:700;
+  letter-spacing:-.025em}
+.cell small{color:var(--muted2);font-size:12px}
+
+.detail{display:none;padding:calc(var(--nav) + 34px) 0 80px}
+body.on-detail .detail{display:block}
+body.on-detail .browse{display:none}
+.back{display:inline-flex;align-items:center;gap:7px;color:var(--muted);
+  font-size:13.5px;background:none;border:0;cursor:pointer;font-family:inherit;
+  padding:0;margin-bottom:26px}
+.back:hover{color:var(--text)}
+/* 상세에서 옆으로 넘기기. 참고 사이트의 ‹ 0/0 › 자리다.
+   ⚠ 지금은 하나 보고 목록으로 돌아가야 다음을 본다. 마흔세 개를 그렇게
+     보게 하면 서너 개 보고 나간다. */
+.dnav{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.dnav button{width:34px;height:34px;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line);background:transparent;color:var(--text);
+  font-size:15px;line-height:1;transition:.16s}
+.dnav button:hover:not(:disabled){background:var(--fill)}
+.dnav button:disabled{opacity:.28;cursor:default}
+.dnav .at{font-size:12.5px;color:var(--muted2);
+  font-feature-settings:"tnum" 1}
+.dnav .sp{flex:1}
+.dhead{display:flex;align-items:flex-end;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.dhead h2{font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-.04em}
+.dhead p{color:var(--muted);font-size:14px;margin-top:4px}
+.dhead .kind{color:var(--muted2);font-size:12.5px;letter-spacing:.06em}
+.shots{display:grid;gap:20px;margin-top:30px}
+.shot{background:var(--raise);border:1px solid var(--line-soft);padding:22px;
+  display:flex;align-items:center;justify-content:center}
+.shot img{max-width:100%;display:block}
+.cap{color:var(--muted2);font-size:12.5px;margin-top:8px}
+.spec{margin-top:36px;display:grid;grid-template-columns:112px 1fr;
+  gap:0 22px;font-size:13px}
+.spec dt{color:var(--muted2);padding:8px 0;border-top:1px solid var(--line-soft)}
+.spec dd{color:var(--muted);padding:8px 0;border-top:1px solid var(--line-soft);
+  word-break:keep-all}
+.spec .sw{display:inline-block;width:9px;height:9px;border-radius:2px;
+  margin-right:5px;vertical-align:-1px;border:1px solid var(--line)}
+
+.rules{margin-top:28px;border-top:1px solid var(--line)}
+.rule{display:grid;grid-template-columns:180px 1fr;gap:26px;padding:18px 0;
+  border-bottom:1px solid var(--line-soft)}
+.rule b{font-size:14px;font-weight:700;letter-spacing:-.025em}
+.rule p{color:var(--muted);font-size:14px;word-break:keep-all}
+footer{padding:46px 0 74px;color:var(--muted2);font-size:12.5px}
+
+@media (max-width:760px){
+  .nav ul{gap:15px} .nav a{font-size:13px}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:20px 14px}
+  .rule,.spec{grid-template-columns:1fr;gap:2px}
+  .spec dd{padding-top:0;border-top:0;padding-bottom:9px}
+  .sec{padding:52px 0}
+}
+</style>
+</head><body>
+
+<nav class="nav"><div class="inner">
+  <span class="mark">로고 · 명함 디자인</span>
+  <ul>
+    <li><a href="#top" class="on">홈</a></li>
+    <li><a href="#logo">로고</a></li>
+    <li><a href="#card">명함</a></li>
+    <li><a href="#check">검수</a></li>
+    <li><a href="#terms">안내</a></li>
+  </ul>
+</div></nav>
+
+<div class="browse">
+<header class="hero" id="top"><div class="inner">
+  <h1 class="rv">작게 줄여도 알아보고,<br>
+     <span class="hi">인쇄해도 되돌아오지 않게.</span></h1>
+  <p class="rv">화면에서 예쁜 것과 손에 쥐었을 때 읽히는 것은 다릅니다.
+     글자 크기를 실제 인쇄 치수로 환산해 확인하고, 재단 여백과 명암 대비를
+     검사한 뒤에 드립니다.</p>
+  <div class="acts rv">
+    <a class="act on" href="#logo">로고 보기</a>
+    <a class="act" href="#card">명함 보기</a>
+    <a class="act" href="#terms">거래 안내</a>
+  </div>
+  <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+       stroke-width="1.6" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg>
+</div></header>
+
+<section class="sec" id="sell"><div class="inner">
+  <div class="sell"><div class="rv"><b>로고</b><div class="won">39,000<small>원부터</small></div><p>시안 6개 · 방향 안에서 수정 무제한. AI · EPS · PDF · SVG 벡터 원본과 투명 PNG를 드립니다.</p><div class="when">첫 시안 3시간</div></div><div class="rv"><b>명함</b><div class="won">29,000<small>원부터</small></div><p>앞뒤 · 판형 2종 · 인쇄용 PDF. 인쇄 200매와 배송까지 맡기시면 45,000원입니다.</p><div class="when">첫 시안 3시간</div></div><div class="rv"><b>브랜드 일러스트</b><div class="won">29,000<small>원부터</small></div><p>마스코트 · 가게 그림 · 스팟 삽화 · 포장 패턴. 로고와 같은 색·같은 화풍으로 그립니다.</p><div class="when">첫 시안 3시간</div></div></div>
+  <div class="tags rv"><span>#치과</span><span>#카페</span><span>#법무법인</span><span>#게임 스튜디오</span><span>#목공방</span><span>#사진 스튜디오</span><span>#피부과</span><span>#부동산</span><span>#교육</span><span>#피트니스</span><span>#식당</span><span>#동물병원</span><span>#세무회계</span><span>#헤어살롱</span><span>#플라워샵</span><span>#인테리어</span><span>#번역·통역</span><span>#자동차 정비</span><span>#베이커리</span><span>#심리상담</span><span>#소프트웨어</span><span>#정밀가공</span><span>#물류</span><span>#엔지니어링</span><span>#공예 아뜰리에</span><span>#제품 디자인</span></div>
+  <p class="fine rv" style="text-align:center;margin:26px auto 0">
+     표시된 상호 · 이름 · 연락처는 실제 고객이 아닌 예시입니다.
+     시안의 구성과 인쇄 적합성을 보여주기 위해 만든 가상의 사례이며,
+     로고 역시 실재하는 상표가 아닙니다.</p>
+</div></section>
+
+<section class="sec" id="logo"><div class="inner">
+  <h2>로고</h2>
+  <p class="lead">열 갈래에서 고르실 수 있습니다 — 어느 쪽이 맞을지
+     모르시면 하시는 일을 듣고 추천해 드립니다.
+     <span id="n-logo"></span> · 누르면 적용 예시와 잰 값을 보실 수 있습니다.</p>
+  <div class="filters"><button class="f" type="button" data-k="logo" data-g="ALL" aria-pressed="true">전체</button><button class="f" type="button" data-k="logo" data-g="심볼형" aria-pressed="false">심볼형</button><button class="f" type="button" data-k="logo" data-g="캐릭터" aria-pressed="false">캐릭터</button><button class="f" type="button" data-k="logo" data-g="라인 일러스트" aria-pressed="false">라인 일러스트</button><button class="f" type="button" data-k="logo" data-g="워드타입" aria-pressed="false">워드타입</button><button class="f" type="button" data-k="logo" data-g="시그니처" aria-pressed="false">시그니처</button><button class="f" type="button" data-k="logo" data-g="미니멀 레터마크" aria-pressed="false">미니멀 레터마크</button><button class="f" type="button" data-k="logo" data-g="엠블럼" aria-pressed="false">엠블럼</button><button class="f" type="button" data-k="logo" data-g="캘리그라피" aria-pressed="false">캘리그라피</button><button class="f" type="button" data-k="logo" data-g="기업형" aria-pressed="false">기업형</button><button class="f" type="button" data-k="logo" data-g="앱아이콘" aria-pressed="false">앱아이콘</button></div>
+  <div class="grid" id="grid-logo"></div>
+</div></section>
+
+<section class="sec" id="card"><div class="inner">
+  <h2>명함</h2>
+  <p class="lead">앞뒤 · 판형 · 인쇄 사양까지 한 벌로 만듭니다.
+     <span id="n-card"></span> — 누르면 앞면 · 뒷면 · 목업을 보실 수 있습니다.</p>
+  <div class="filters"><button class="f" type="button" data-k="card" data-g="ALL" aria-pressed="true">전체</button><button class="f" type="button" data-k="card" data-g="의료·건강" aria-pressed="false">의료·건강</button><button class="f" type="button" data-k="card" data-g="음식·카페" aria-pressed="false">음식·카페</button><button class="f" type="button" data-k="card" data-g="공방·제작" aria-pressed="false">공방·제작</button><button class="f" type="button" data-k="card" data-g="전문직·물류" aria-pressed="false">전문직·물류</button><button class="f" type="button" data-k="card" data-g="교육·문화" aria-pressed="false">교육·문화</button><button class="f" type="button" data-k="card" data-g="뷰티·반려" aria-pressed="false">뷰티·반려</button><button class="f" type="button" data-k="card" data-g="스튜디오·IT" aria-pressed="false">스튜디오·IT</button></div>
+  <div class="grid" id="grid-card"></div>
+</div></section>
+
+<section class="sec" id="check"><div class="inner">
+  <h2>보내기 전에 검사합니다</h2>
+  <p class="lead">눈으로 훑는 것이 아니라 매번 자동으로 돌리고,
+     통과한 것만 보냅니다.</p>
+  <div class="rules"><div class="rule rv"><b>인쇄 최소 크기</b><p>본문 6.5pt · 보조 5.5pt 아래로 내려가지 않는지 실제 인쇄 치수로 환산해 확인합니다.</p></div><div class="rule rv"><b>재단 여백</b><p>사방 3mm 도련과 재단선을 넣고, 모든 글자가 안전 여백 안쪽에 있는지 봅니다.</p></div><div class="rule rv"><b>명암 대비</b><p>글자와 배경의 대비가 WCAG AA(4.5:1)를 넘는지 잽니다.</p></div><div class="rule rv"><b>인쇄 색</b><p>SWOP 프로파일로 CMYK 왕복시켜 화면 색이 종이에서 얼마나 달라지는지 확인합니다.</p></div><div class="rule rv"><b>색 배치</b><p>로고와 판의 색상차 · 대비를 재서 로고가 판에 묻히거나 어중간하게 부딪히지 않는지 봅니다.</p></div><div class="rule rv"><b>드리는 파일</b><p>벡터 SVG · 투명 PNG · 단색 2종 · 인쇄용 PDF(300dpi · CMYK · 재단선).</p></div></div>
+</div></section>
+
+<section class="sec" id="terms"><div class="inner">
+  <h2>거래 안내</h2>
+  <p class="lead">값이나 솜씨보다 <b>말해 두지 않은 것</b> 때문에 틀어집니다.
+     미리 적어 둡니다.</p>
+  <div class="rules"><div class="rule rv"><b>저작권</b><p>최종 시안은 상업적으로 제한 없이 쓰실 수 있습니다. 저작권은 의뢰인과 저 양쪽에 있고, 제작한 로고는 이 포트폴리오에 실립니다 — 원치 않으시면 미리 말씀해 주세요. 고르지 않은 다른 시안을 함께 쓰시려면 추가 비용이 듭니다.</p></div><div class="rule rv"><b>상표</b><p>로고는 상호의 뜻을 그림으로 옮긴 것이고 상표 등록과는 별개입니다. 비슷한 상표가 이미 있는지는 특허청 검토가 필요한 영역이라 제가 확인해 드리지 않습니다. 등록을 생각하고 계시면 변리사 상담을 먼저 받으시길 권합니다.</p></div><div class="rule rv"><b>시작 조건</b><p>상호 · 업종 · 원하시는 느낌이 정해진 뒤에 시작합니다. 작업이 시작된 뒤 상호나 업종이 바뀌면 새 작업이 됩니다.</p></div><div class="rule rv"><b>수정 범위</b><p>고르신 시안의 방향을 지키는 선에서 색 · 굵기 · 간격 · 배치를 고쳐드리고, 횟수는 세지 않습니다. 방향을 아예 바꾸시려면 새 작업으로 봅니다.</p></div><div class="rule rv"><b>파일 보관</b><p>원본 파일은 전달 후 1년 동안 보관합니다. 그 안에는 언제든 다시 보내드리고 비용은 없습니다. 시안을 받으신 뒤 일주일 동안 답이 없으시면 가장 완성도가 높은 것으로 원본을 보내드리고 마무리합니다.</p></div><div class="rule rv"><b>인쇄 색</b><p>화면 색과 인쇄 색은 같지 않습니다. 보내기 전에 인쇄용 색으로 바꿔 어긋나는 곳을 확인하지만, 진한 파랑 · 형광 계열은 종이에서 조금 가라앉습니다.</p></div><div class="rule rv"><b>인쇄 취소 · 오탈자</b><p>인쇄를 넣기 전까지는 취소하실 수 있고, 넣기 직전에 한 번 더 여쭙습니다. 들어간 뒤에는 취소가 되지 않습니다. 전화번호 · 주소 · 이름은 넣기 전에 꼭 확인해 주세요 — 확인받은 그대로 인쇄된 뒤의 오탈자는 재인쇄 비용이 듭니다.</p></div><div class="rule rv"><b>환불</b><p>시안을 보내드리기 전까지는 100% 환불해 드립니다. 받으신 뒤에는 환불이 어렵고, 대신 방향 안에서 수정은 횟수를 세지 않습니다. 인쇄가 들어간 뒤에는 인쇄비를 뺀 금액만 환불됩니다.</p></div></div>
+</div></section>
+
+<footer><div class="inner" style="display:flex;justify-content:space-between;
+  gap:20px;flex-wrap:wrap">
+  <span>로고 · 명함 · 소개 페이지 · 발표 자료</span>
+  <span>문의 — 숨고 · 크몽 메시지</span>
+</div></footer>
+</div>
+
+<article class="detail"><div class="inner">
+  <button class="back" id="d-back" type="button">&#8592; 목록으로</button>
+  <div class="dnav">
+    <button id="d-prev" type="button" aria-label="이전">&#8249;</button>
+    <button id="d-next" type="button" aria-label="다음">&#8250;</button>
+    <span class="at" id="d-at"></span><span class="sp"></span>
+  </div>
+  <div class="dhead">
+    <div><h2 id="d-title"></h2><p id="d-sub"></p></div>
+    <span class="kind" id="d-kind"></span>
+  </div>
+  <div class="shots" id="d-shots"></div>
+  <dl class="spec" id="d-spec"></dl>
+</div></article>
+
+<script>
+var KOUNT = "건", KLOGO = "로고", KCARD = "명함";
+
+var LOGOS = [{"key":"dental","brand":"소나무치과","kind":"치과","group":"의료·건강","tagline":"오래 쓰는 치아를 만듭니다","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #30A0B0 · 명함 바탕 #2E4557"],["본문 명암비","9.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/cc8cc2bd53cea014.jpg","label":"로고"},{"src":"img/1f50d7a527bd817f.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/c19edf81c70cbe30.jpg","label":"돌출 간판"},{"src":"img/64fbabb052716711.jpg","label":"포장"}]},{"key":"cafe","brand":"라온 커피로스터스","kind":"카페","group":"음식·카페","tagline":"매일 볶는 싱글오리진","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #D07050 · 명함 바탕 #B98A72"],["본문 명암비","5.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/3974c71b94cbfb7a.jpg","label":"로고"},{"src":"img/a4b08f5a065f3a30.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/3b521d93a9712321.jpg","label":"돌출 간판"},{"src":"img/f0fa9a70889e52ec.jpg","label":"포장"}]},{"key":"law","brand":"법무법인 정도","kind":"법무법인","group":"전문직·물류","tagline":"기업 자문 · 지식재산","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #C0A040 · 명함 바탕 #0C0C0E"],["본문 명암비","17.3 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/df5072d662a8e23f.jpg","label":"로고"},{"src":"img/e6f3768c12487f2a.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/1af130953c69f7ce.jpg","label":"돌출 간판"},{"src":"img/b4be19cbc82e43bf.jpg","label":"포장"}]},{"key":"game","brand":"스튜디오 코발트","kind":"게임 스튜디오","group":"스튜디오·IT","tagline":"인디 게임 기획 · 개발","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #5040E0 · 명함 바탕 #3A4468"],["본문 명암비","9.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/a97e388cb223ca91.jpg","label":"로고"},{"src":"img/0ecb06d465b8c44d.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/5533d434f16ec2aa.jpg","label":"돌출 간판"},{"src":"img/6b45ef2c34ed1426.jpg","label":"포장"}]},{"key":"craft","brand":"목요일 공방","kind":"목공방","group":"공방·제작","tagline":"원목 가구 제작 · 수리","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #C08010 · 명함 바탕 #8D9375"],["본문 명암비","5.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/d6c1d62b4fda61e6.jpg","label":"로고"},{"src":"img/a18ca8bace06d7ee.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/1dde58810d32b3f4.jpg","label":"돌출 간판"},{"src":"img/25d69331440a47be.jpg","label":"포장"}]},{"key":"studio_photo","brand":"여백 스튜디오","kind":"사진 스튜디오","group":"스튜디오·IT","tagline":"인물 · 제품 촬영","size":"90 × 50 mm","detail":[["로고 종류","워드타입"],["색","로고 #404040 · 명함 바탕 #131313"],["본문 명암비","17.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"워드타입","shots":[{"src":"img/397cc2ca309e42bc.jpg","label":"로고"},{"src":"img/e968e5bcc1bcde97.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/78915342125d8f5e.jpg","label":"돌출 간판"},{"src":"img/ba36f6b7e8ce0d0a.jpg","label":"포장"}]},{"key":"skin","brand":"결 피부과의원","kind":"피부과","group":"의료·건강","tagline":"피부 관리 · 레이저","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #E090A0 · 명함 바탕 #FFFCFD"],["본문 명암비","16.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/0e84f9e8e0c3f1aa.jpg","label":"로고"},{"src":"img/d31436fe54ba55a0.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/7fd87b4477fb3bcf.jpg","label":"돌출 간판"},{"src":"img/b7cb6922ddd73ec7.jpg","label":"포장"}]},{"key":"realty","brand":"터전 공인중개사","kind":"부동산","group":"전문직·물류","tagline":"아파트 · 상가 · 토지","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #008090 · 명함 바탕 #3A4468"],["본문 명암비","9.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/d0d7d00ef8a11710.jpg","label":"로고"},{"src":"img/005eed59009ebcad.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/7c64bc8ff5a8e8d1.jpg","label":"돌출 간판"},{"src":"img/c8a6d90e09a0ac6b.jpg","label":"포장"}]},{"key":"academy","brand":"한결 수학학원","kind":"교육","group":"교육·문화","tagline":"중등 · 고등 수학","size":"50 × 90 mm 세로","detail":[["로고 종류","캐릭터"],["색","로고 #70B070 · 명함 바탕 #0F1A14"],["본문 명암비","15.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","50 × 90 mm 세로"]],"ko":"캐릭터","shots":[{"src":"img/c5303fb0407faf69.jpg","label":"로고"},{"src":"img/7da8c48f5b6e0cc4.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/ddccf91fcbc69d17.jpg","label":"돌출 간판"},{"src":"img/433916532244453a.jpg","label":"포장"}]},{"key":"gym","brand":"코어 짐","kind":"피트니스","group":"의료·건강","tagline":"1:1 퍼스널 트레이닝","size":"90 × 50 mm","detail":[["로고 종류","워드타입"],["색","로고 #B0D020 · 명함 바탕 #16181A"],["본문 명암비","15.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"워드타입","shots":[{"src":"img/2b389b7f1cd59fae.jpg","label":"로고"},{"src":"img/e237e7d3e10ba784.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/eb156db0912fb735.jpg","label":"돌출 간판"},{"src":"img/05e2d21a3ae55c64.jpg","label":"포장"}]},{"key":"dining","brand":"온기 한상","kind":"식당","group":"음식·카페","tagline":"제철 한식 · 예약제","size":"60 × 60 mm","detail":[["로고 종류","캐릭터"],["색","로고 #C07050 · 명함 바탕 #1A1411"],["본문 명암비","15.1 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","60 × 60 mm"]],"ko":"캐릭터","shots":[{"src":"img/5325f36850d5a456.jpg","label":"로고"},{"src":"img/70ceb58a339fdb27.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/2de0050b1b35d0a0.jpg","label":"돌출 간판"},{"src":"img/3e22a82341a89c06.jpg","label":"포장"}]},{"key":"vet","brand":"숲길 동물병원","kind":"동물병원","group":"의료·건강","tagline":"내과 · 예방접종","size":"90 × 50 mm","detail":[["로고 종류","캐릭터"],["색","로고 #709070 · 명함 바탕 #F6FAFD"],["본문 명암비","16.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캐릭터","shots":[{"src":"img/5bcc8e8d2f946c9e.jpg","label":"로고"},{"src":"img/a390315c826c17f6.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/c9d96914301fe2d8.jpg","label":"돌출 간판"},{"src":"img/1ab21fbbeecc6413.jpg","label":"포장"}]},{"key":"tax","brand":"바른 세무회계","kind":"세무회계","group":"전문직·물류","tagline":"법인 · 개인 기장 · 양도","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #2070F0 · 명함 바탕 #F8F9FA"],["본문 명암비","15.7 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/fd74aa0e8a27f190.jpg","label":"로고"},{"src":"img/b020a283b39970e8.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/22da7dab143bd8e5.jpg","label":"돌출 간판"},{"src":"img/2fae333d6555716e.jpg","label":"포장"}]},{"key":"salon","brand":"채움 헤어","kind":"헤어살롱","group":"뷰티·반려","tagline":"커트 · 펌 · 클리닉","size":"90 × 50 mm","detail":[["로고 종류","워드타입"],["색","로고 #904070 · 명함 바탕 #8C7488"],["본문 명암비","4.2 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"워드타입","shots":[{"src":"img/ce6e58f219e27ac1.jpg","label":"로고"},{"src":"img/4ce7b22334d036bc.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/8780efa39708fc02.jpg","label":"돌출 간판"},{"src":"img/8785b65951b27062.jpg","label":"포장"}]},{"key":"flower","brand":"온담 플라워","kind":"플라워샵","group":"뷰티·반려","tagline":"부케 · 정기 구독","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #E090A0 · 명함 바탕 #B98A72"],["본문 명암비","5.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/012224e031c238fb.jpg","label":"로고"},{"src":"img/ff108e4fa4f59482.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/6c65d053457f127a.jpg","label":"돌출 간판"},{"src":"img/1d4db0b17d39f1bd.jpg","label":"포장"}]},{"key":"interior","brand":"여백 디자인","kind":"인테리어","group":"스튜디오·IT","tagline":"주거 · 상업 공간 설계","size":"90 × 50 mm","detail":[["로고 종류","워드타입"],["색","로고 #807060 · 명함 바탕 #B98A72"],["본문 명암비","5.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"워드타입","shots":[{"src":"img/530b36e62911f68b.jpg","label":"로고"},{"src":"img/55b34ed0b8718857.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/eab51d513fcf2f3c.jpg","label":"돌출 간판"},{"src":"img/2e801c239a260e8d.jpg","label":"포장"}]},{"key":"translate","brand":"말결 번역","kind":"번역·통역","group":"전문직·물류","tagline":"영·일 기술 문서 · 통역","size":"50 × 90 mm 세로","detail":[["로고 종류","심볼형"],["색","로고 #30A0A0 · 명함 바탕 #0C1618"],["본문 명암비","15.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","50 × 90 mm 세로"]],"ko":"심볼형","shots":[{"src":"img/8ba4ced8fc09e6ef.jpg","label":"로고"},{"src":"img/2553e12b7a14f7d3.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/c56c15e24b513589.jpg","label":"돌출 간판"},{"src":"img/bf50625f485bb09e.jpg","label":"포장"}]},{"key":"garage","brand":"한길 카센터","kind":"자동차 정비","group":"스튜디오·IT","tagline":"정비 · 검사 대행","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #A0B050 · 명함 바탕 #14170F"],["본문 명암비","15.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/b9eb1de2e32cad95.jpg","label":"로고"},{"src":"img/67641f5b4a18b293.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/009dc0a29b48a715.jpg","label":"돌출 간판"},{"src":"img/7c334b7ba0c5d8b1.jpg","label":"포장"}]},{"key":"bakery","brand":"밀과 뜰","kind":"베이커리","group":"음식·카페","tagline":"당일 구움 · 천연 발효","size":"90 × 50 mm","detail":[["로고 종류","캐릭터"],["색","로고 #D09050 · 명함 바탕 #FFFDF9"],["본문 명암비","14.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캐릭터","shots":[{"src":"img/884bd87baeb35c8b.jpg","label":"로고"},{"src":"img/c895382ac62ba42a.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/1e50b2b737351317.jpg","label":"돌출 간판"},{"src":"img/a29e191d984482d6.jpg","label":"포장"}]},{"key":"counsel","brand":"마음결 상담센터","kind":"심리상담","group":"의료·건강","tagline":"개인 · 부부 상담","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #8070C0 · 명함 바탕 #6FA6AD"],["본문 명암비","6.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/9aa6218dfe0e0992.jpg","label":"로고"},{"src":"img/3dbebeb67caaad49.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/ebbdcee1bd7ba49e.jpg","label":"돌출 간판"},{"src":"img/6d4211db0411c67a.jpg","label":"포장"}]},{"key":"soft","brand":"넥스트폼","kind":"소프트웨어","group":"스튜디오·IT","tagline":"기업용 업무 소프트웨어","size":"90 × 50 mm","detail":[["로고 종류","기업형"],["색","로고 #6050E0 · 명함 바탕 #F8F7FC"],["본문 명암비","16.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"기업형","shots":[{"src":"img/7a02e9996a656d47.jpg","label":"로고"},{"src":"img/f2688e83bb96430d.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/ddeeaba1dec16073.jpg","label":"돌출 간판"},{"src":"img/f65cc3d8d98e1142.jpg","label":"포장"}]},{"key":"precision","brand":"대성정밀","kind":"정밀가공","group":"공방·제작","tagline":"금형 · 정밀 부품 가공","size":"90 × 50 mm","detail":[["로고 종류","기업형"],["색","로고 #007080 · 명함 바탕 #6FA6AD"],["본문 명암비","6.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"기업형","shots":[{"src":"img/1a0147bd4b196005.jpg","label":"로고"},{"src":"img/0e7af8e880abfdca.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/d4bc87135aeba944.jpg","label":"돌출 간판"},{"src":"img/7469a778fe8b3b5a.jpg","label":"포장"}]},{"key":"logis","brand":"한결물류","kind":"물류","group":"전문직·물류","tagline":"전국 당일 · 새벽 배송","size":"90 × 50 mm","detail":[["로고 종류","기업형"],["색","로고 #0040B0 · 명함 바탕 #F7F9FB"],["본문 명암비","16.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"기업형","shots":[{"src":"img/c8cc71506518877f.jpg","label":"로고"},{"src":"img/09d4100f61822fac.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/45fb86acea10a79a.jpg","label":"돌출 간판"},{"src":"img/b5ba92f1e7c3cb51.jpg","label":"포장"}]},{"key":"engtech","brand":"코어테크","kind":"엔지니어링","group":"공방·제작","tagline":"설비 설계 · 시공 감리","size":"90 × 50 mm","detail":[["로고 종류","기업형"],["색","로고 #3090F0 · 명함 바탕 #0E1726"],["본문 명암비","16.4 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"기업형","shots":[{"src":"img/af303382ea77cbdd.jpg","label":"로고"},{"src":"img/140ca9d2490ff3e8.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/a328df778b70a9df.jpg","label":"돌출 간판"},{"src":"img/88f79a94e4a58525.jpg","label":"포장"}]},{"key":"atelier","brand":"담다 아뜰리에","kind":"공예 아뜰리에","group":"공방·제작","tagline":"도자 · 유리 소품 제작","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #B06030 · 명함 바탕 #FAF8F4"],["본문 명암비","16.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/536f1eb6ef1ed512.jpg","label":"로고"},{"src":"img/7e933799da19ef08.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/252bc79baf886404.jpg","label":"돌출 간판"},{"src":"img/0249b621cc08265c.jpg","label":"포장"}]},{"key":"objet","brand":"오브제 랩","kind":"제품 디자인","group":"공방·제작","tagline":"생활 소품 · 가구 설계","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #908070 · 명함 바탕 #FBF9F5"],["본문 명암비","15.8 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/5bb105cc29342c0f.jpg","label":"로고"},{"src":"img/316195210dc1d73c.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/44745c67c16682ee.jpg","label":"돌출 간판"},{"src":"img/ef01481efdc9bbed.jpg","label":"포장"}]},{"key":"space","brand":"서리 디자인","kind":"공간 디자인","group":"스튜디오·IT","tagline":"상업 공간 브랜딩 설계","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #908060 · 명함 바탕 #8A6C5C"],["본문 명암비","4.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/660209bf3ac4ff97.jpg","label":"로고"},{"src":"img/15d3b8cdc465de8b.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/46175145d2e058e8.jpg","label":"돌출 간판"},{"src":"img/0c2d1c17222f3abd.jpg","label":"포장"}]},{"key":"photo_min","brand":"무영 스튜디오","kind":"필름 스튜디오","group":"스튜디오·IT","tagline":"필름 인물 · 웨딩 촬영","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #6090A0 · 명함 바탕 #FBFDFD"],["본문 명암비","16.2 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/30071e49a8ff4fbd.jpg","label":"로고"},{"src":"img/4a699bb2c0f3f04c.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/5d97d7c5021194bf.jpg","label":"돌출 간판"},{"src":"img/73fe55d7638e854f.jpg","label":"포장"}]},{"key":"tteok","brand":"고운 떡집","kind":"떡집","group":"음식·카페","tagline":"매일 아침 찌는 떡","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #D09040 · 명함 바탕 #C4A778"],["본문 명암비","7.8 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/fb6212865b476f5b.jpg","label":"로고"},{"src":"img/b2c6c14bec6cc9fa.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/0d4fe64505f1f647.jpg","label":"돌출 간판"},{"src":"img/98de58c8521a7815.jpg","label":"포장"}]},{"key":"tea","brand":"다연 찻집","kind":"전통 찻집","group":"음식·카페","tagline":"덖음차 · 계절 다과","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #305040 · 명함 바탕 #B3B798"],["본문 명암비","7.8 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/48022b296e858b4b.jpg","label":"로고"},{"src":"img/6f1109b40157f716.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/73791190613c46be.jpg","label":"돌출 간판"},{"src":"img/374887d21da35a5b.jpg","label":"포장"}]},{"key":"gukbap","brand":"손맛 국밥","kind":"한식","group":"음식·카페","tagline":"24시간 끓이는 사골","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #D07040 · 명함 바탕 #191614"],["본문 명암비","15.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/4e535beaa48dc64f.jpg","label":"로고"},{"src":"img/94feb46e3a923df5.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/0b0711ac07b585df.jpg","label":"돌출 간판"},{"src":"img/1d4686bc9ae30bda.jpg","label":"포장"}]},{"key":"sool","brand":"밤톨 주막","kind":"전통주점","group":"음식·카페","tagline":"전통주 · 안주 한 상","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #303030 · 명함 바탕 #131313"],["본문 명암비","17.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/c9fb310ce673b586.jpg","label":"로고"},{"src":"img/c2bc1e8827ef5866.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/0748232b0ddba045.jpg","label":"돌출 간판"},{"src":"img/b9d18ad67aa94712.jpg","label":"포장"}]},{"key":"optic","brand":"또렷 안경원","kind":"안경원","group":"의료·건강","tagline":"검안 · 렌즈 · 수리","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #3080E0 · 명함 바탕 #FCFBFE"],["본문 명암비","16.4 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/9c4bcd46db84db82.jpg","label":"로고"},{"src":"img/47666786a6d08e88.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/07af36e762f5a675.jpg","label":"돌출 간판"},{"src":"img/4454aac608539050.jpg","label":"포장"}]},{"key":"bike","brand":"바퀴살","kind":"자전거","group":"스튜디오·IT","tagline":"로드 · MTB 정비","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #C0E020 · 명함 바탕 #121212"],["본문 명암비","17.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/9ea483e43a8650d9.jpg","label":"로고"},{"src":"img/15b98f77d2536ac4.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/502b59b1f60bc975.jpg","label":"돌출 간판"},{"src":"img/837c376b7e2baf62.jpg","label":"포장"}]},{"key":"wine","brand":"저녁의 잔","kind":"와인바","group":"음식·카페","tagline":"내추럴 와인 · 페어링","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #B05050 · 명함 바탕 #8A5F63"],["본문 명암비","5.1 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/a895840d06121083.jpg","label":"로고"},{"src":"img/c0d7db7b07a27eeb.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/03e62a6757a752a9.jpg","label":"돌출 간판"},{"src":"img/73ab64071f468582.jpg","label":"포장"}]},{"key":"pilates","brand":"결 필라테스","kind":"필라테스","group":"의료·건강","tagline":"1:1 리포머 · 소도구","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #E080A0 · 명함 바탕 #A6BAA0"],["본문 명암비","7.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/a9fcf94f7e3e4fc0.jpg","label":"로고"},{"src":"img/6cf84b0cd2cd7160.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/f1601503fe067a87.jpg","label":"돌출 간판"},{"src":"img/24941de4da6b4adf.jpg","label":"포장"}]},{"key":"laundry","brand":"말끔 세탁","kind":"세탁","group":"전문직·물류","tagline":"드라이 · 수선 · 운동화","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #408090 · 명함 바탕 #F5FAFA"],["본문 명암비","16.1 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/76946877187907e4.jpg","label":"로고"},{"src":"img/a0472d433ee390a2.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/9293380bef0ed28b.jpg","label":"돌출 간판"},{"src":"img/5ca7bf4eda331cbf.jpg","label":"포장"}]},{"key":"book","brand":"낮은 서가","kind":"독립서점","group":"교육·문화","tagline":"문학 · 에세이 · 소규모 출판","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #A08050 · 명함 바탕 #FBF8F2"],["본문 명암비","15.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/b4f4b370425a7556.jpg","label":"로고"},{"src":"img/3afd0de80ef88d69.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/aac516bb136815f8.jpg","label":"돌출 간판"},{"src":"img/15f55eeb6470eb1c.jpg","label":"포장"}]},{"key":"music","brand":"소리결 음악학원","kind":"음악학원","group":"교육·문화","tagline":"피아노 · 보컬 · 작곡","size":"90 × 50 mm","detail":[["로고 종류","캐릭터"],["색","로고 #904070 · 명함 바탕 #8C7488"],["본문 명암비","4.2 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캐릭터","shots":[{"src":"img/b2e0ada589274230.jpg","label":"로고"},{"src":"img/aaa2effbf3a810e2.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/0316118e58aabfd0.jpg","label":"돌출 간판"},{"src":"img/3956a8cfb513f487.jpg","label":"포장"}]},{"key":"farm","brand":"들녘 농장","kind":"농산물","group":"음식·카페","tagline":"제철 채소 · 꾸러미 배송","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #708040 · 명함 바탕 #8D9375"],["본문 명암비","5.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/bec546389590324d.jpg","label":"로고"},{"src":"img/ac1a477ccfcb51c4.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/6fd12847592c2881.jpg","label":"돌출 간판"},{"src":"img/77cb5d6e93e4c081.jpg","label":"포장"}]},{"key":"clinic","brand":"온담 한의원","kind":"한의원","group":"의료·건강","tagline":"침 · 추나 · 한약","size":"50 × 90 mm 세로","detail":[["로고 종류","캘리그라피"],["색","로고 #608060 · 명함 바탕 #5F7958"],["본문 명암비","4.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","50 × 90 mm 세로"]],"ko":"캘리그라피","shots":[{"src":"img/91b2aa2ebf9ed983.jpg","label":"로고"},{"src":"img/58826d0b6c3d31d0.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/e0ba62f57dcf2f5a.jpg","label":"돌출 간판"},{"src":"img/babeac3ac19870ff.jpg","label":"포장"}]},{"key":"appsoft","brand":"이음소프트","kind":"소프트웨어","group":"스튜디오·IT","tagline":"협업 도구 · 사내 업무 앱","size":"90 × 50 mm","detail":[["로고 종류","앱아이콘"],["본문 명암비","16.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"앱아이콘","shots":[{"src":"img/3c1a8b76512245ea.jpg","label":"로고"},{"src":"img/e80cce24725aea8f.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/2c003d88ea0b3934.jpg","label":"돌출 간판"},{"src":"img/3c9180847602c246.jpg","label":"포장"}]},{"key":"appedu","brand":"포근돌담학원","kind":"학원","group":"교육·문화","tagline":"초·중등 수학 · 개별 진도","size":"90 × 50 mm","detail":[["로고 종류","앱아이콘"],["본문 명암비","16.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"앱아이콘","shots":[{"src":"img/70373b6d42fb9796.jpg","label":"로고"},{"src":"img/54e93c3ac1c3b6c6.jpg","label":"세로 조합 · 가로 조합"},{"src":"img/ec75c745b024aa63.jpg","label":"돌출 간판"},{"src":"img/905d388eed9cfb49.jpg","label":"포장"}]},{"key":"lumen","brand":"Lumen","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"조명 · 인테리어 스튜디오","detail":[["업종","조명 · 인테리어 스튜디오"],["상호 뜻","루멘 — 빛의 단위"],["첫 글자","L → pendant lamp"],["만드는 방식","L 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/df78798ff7f57f45.jpg","label":"시그니처"}]},{"key":"ancora","brand":"Ancora","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"항구 앞 이탈리안 다이닝","detail":[["업종","항구 앞 이탈리안 다이닝"],["상호 뜻","앙코라 — 닻, 그리고 '다시'"],["첫 글자","A → ship's anchor"],["만드는 방식","A 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/6c7ebf493502ab18.jpg","label":"시그니처"}]},{"key":"crane","brand":"Crane","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"인물 사진 스튜디오","detail":[["업종","인물 사진 스튜디오"],["상호 뜻","크레인 — 학"],["첫 글자","C → crane bird"],["만드는 방식","C 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/5576342a3140b9d9.jpg","label":"시그니처"}]},{"key":"ember","brand":"Ember","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"화덕 베이커리","detail":[["업종","화덕 베이커리"],["상호 뜻","엠버 — 잉걸불"],["첫 글자","E → live ember flame"],["만드는 방식","E 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/dea0323c41c37d58.jpg","label":"시그니처"}]},{"key":"quilla","brand":"Quilla","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"에세이 출판 · 글방","detail":[["업종","에세이 출판 · 글방"],["상호 뜻","퀼 — 깃펜"],["첫 글자","Q → quill pen"],["만드는 방식","Q 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/095c2391278ddd44.jpg","label":"시그니처"}]},{"key":"dune","brand":"Dune","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"요가 · 명상 스튜디오","detail":[["업종","요가 · 명상 스튜디오"],["상호 뜻","듄 — 모래 언덕"],["첫 글자","D → sand dune ridge"],["만드는 방식","D 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/d17e7a56e18cf9ab.jpg","label":"시그니처"}]},{"key":"threadly","brand":"Threadly","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"자수 공방","detail":[["업종","자수 공방"],["상호 뜻","스레드 — 실"],["첫 글자","T → needle and thread"],["만드는 방식","T 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/f10581f62ad4f783.jpg","label":"시그니처"}]},{"key":"harbor","brand":"Harbor","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"바닷가 브런치","detail":[["업종","바닷가 브런치"],["상호 뜻","하버 — 항구"],["첫 글자","H → mooring bollards"],["만드는 방식","H 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/976653a5c1850532.jpg","label":"시그니처"}]},{"key":"geuru","brand":"그루","kind":"한글 · 획","group":"한글","ko":"시그니처","tagline":"목공방","detail":[["업종","목공방"],["상호 뜻","그루 — 나무를 세는 말"],["첫 글자","ㄱ → bare tree branch"],["만드는 방식","ㄱ 에 사물을 겹침"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/be3de5cb30e4eced.jpg","label":"시그니처"}]},{"key":"haeyum","brand":"해윰","kind":"한글 · 획","group":"한글","ko":"시그니처","tagline":"심리상담 · 글쓰기 모임","detail":[["업종","심리상담 · 글쓰기 모임"],["상호 뜻","해윰 — 생각"],["첫 글자","ㅎ → rising sun"],["만드는 방식","ㅎ 에 사물을 겹침"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/dc3bc8dcdbeab318.jpg","label":"시그니처"}]},{"key":"sandeul","brand":"산들","kind":"한글 · 획","group":"한글","ko":"시그니처","tagline":"캠핑 · 아웃도어","detail":[["업종","캠핑 · 아웃도어"],["상호 뜻","산들 — 산들바람"],["첫 글자","ㅅ → mountain peak"],["만드는 방식","ㅅ 에 사물을 겹침"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/0fdbebbc5f1d46f9.jpg","label":"시그니처"}]},{"key":"aram","brand":"아람","kind":"한글 · 속공간","group":"한글","ko":"시그니처","tagline":"원목 가구","detail":[["업종","원목 가구"],["상호 뜻","아람 — 잘 여문 열매"],["첫 글자","ㅇ → tree growth rings"],["만드는 방식","ㅇ 에 사물을 앉힘"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/6b6ee95e57d62f4a.jpg","label":"시그니처"}]},{"key":"mireu","brand":"미르","kind":"한글 · 획","group":"한글","ko":"시그니처","tagline":"건축사무소","detail":[["업종","건축사무소"],["상호 뜻","미르 — 용의 옛말"],["첫 글자","ㅁ → old window frame"],["만드는 방식","ㅁ 에 사물을 겹침"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/7dca504860149a78.jpg","label":"시그니처"}]},{"key":"dodam","brand":"도담","kind":"한글 · 획","group":"한글","ko":"시그니처","tagline":"도예 공방","detail":[["업종","도예 공방"],["상호 뜻","도담 — 도담도담 자라다"],["첫 글자","ㄷ → pottery bowl"],["만드는 방식","ㄷ 에 사물을 겹침"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/33d524e465ea729f.jpg","label":"시그니처"}]},{"key":"boreum","brand":"Boreum","kind":"로마자 · 속공간","group":"로마자","ko":"시그니처","tagline":"고양이 동반 카페","detail":[["업종","고양이 동반 카페"],["상호 뜻","보름 — 보름달"],["첫 글자","B → sleeping cat"],["만드는 방식","B 에 사물을 앉힘"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/928a9ca0739d9c82.jpg","label":"시그니처"}]},{"key":"orin","brand":"Orin","kind":"로마자 · 속공간","group":"로마자","ko":"시그니처","tagline":"야간 요가 · 명상","detail":[["업종","야간 요가 · 명상"],["상호 뜻","오린 — 온전한 둥긂"],["첫 글자","O → crescent moon"],["만드는 방식","O 에 사물을 앉힘"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/40ba3cb4881967dd.jpg","label":"시그니처"}]},{"key":"pureun","brand":"Pureun","kind":"로마자 · 속공간","group":"로마자","ko":"시그니처","tagline":"식물 가게","detail":[["업종","식물 가게"],["상호 뜻","푸른 — 푸르다"],["첫 글자","P → potted seedling"],["만드는 방식","P 에 사물을 앉힘"],["표기","로마자"],["아래 문구","집에서 기르는 작은 초록"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/105fca3d505b9a01.jpg","label":"시그니처"}]},{"key":"hanbit","brand":"한빛교습소","kind":"한글 · 속공간","group":"한글","ko":"시그니처","tagline":"공부방","detail":[["업종","공부방"],["상호 뜻","한빛 — 큰 빛"],["첫 글자","ㅎ → open book"],["만드는 방식","ㅎ 에 사물을 앉힘"],["표기","한글"],["아래 문구","한 아이씩 끝까지 봅니다"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/f0da3229647ff68e.jpg","label":"시그니처"}]},{"key":"fernly","brand":"Fernly","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"플랜테리어","detail":[["업종","플랜테리어"],["상호 뜻","펀 — 고사리"],["첫 글자","F → fern frond"],["만드는 방식","F 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/f9e9b756c8d4bb1c.jpg","label":"시그니처"}]},{"key":"ridge","brand":"Ridge","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"아웃도어 의류","detail":[["업종","아웃도어 의류"],["상호 뜻","릿지 — 능선"],["첫 글자","R → mountain ridge"],["만드는 방식","R 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/e106f4c5d879aa9d.jpg","label":"시그니처"}]},{"key":"wave","brand":"Wavely","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"서핑 스쿨","detail":[["업종","서핑 스쿨"],["상호 뜻","웨이브 — 파도"],["첫 글자","W → breaking wave"],["만드는 방식","W 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/ae52f0e857241446.jpg","label":"시그니처"}]},{"key":"nova","brand":"Nova","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"야간 촬영 스튜디오","detail":[["업종","야간 촬영 스튜디오"],["상호 뜻","노바 — 새로 난 별"],["첫 글자","N → shooting star"],["만드는 방식","N 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/4229c6139f87c5fc.jpg","label":"시그니처"}]},{"key":"kite","brand":"Kite","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"어린이 공방","detail":[["업종","어린이 공방"],["상호 뜻","카이트 — 연"],["첫 글자","K → paper kite"],["만드는 방식","K 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/00be915e2f5c3baa.jpg","label":"시그니처"}]},{"key":"grain","brand":"Graine","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"식빵 전문점","detail":[["업종","식빵 전문점"],["상호 뜻","그레인 — 낟알"],["첫 글자","G → ear of wheat"],["만드는 방식","G 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/6cda61cb2f1330a0.jpg","label":"시그니처"}]},{"key":"vine","brand":"Vinea","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"내추럴 와인바","detail":[["업종","내추럴 와인바"],["상호 뜻","바인 — 덩굴"],["첫 글자","V → grapevine tendril"],["만드는 방식","V 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/115178dde23b38c6.jpg","label":"시그니처"}]},{"key":"sail","brand":"Sailo","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"요트 클럽","detail":[["업종","요트 클럽"],["상호 뜻","세일 — 돛"],["첫 글자","S → sail on a mast"],["만드는 방식","S 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/9cd97555a77b56a7.jpg","label":"시그니처"}]},{"key":"mira","brand":"Mira","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"호숫가 펜션","detail":[["업종","호숫가 펜션"],["상호 뜻","미라 — 비치어 보이다"],["첫 글자","M → peaks in still water"],["만드는 방식","M 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/a849aebbff6f4c7f.jpg","label":"시그니처"}]},{"key":"jade","brand":"Jade","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"주얼리 공방","detail":[["업종","주얼리 공방"],["상호 뜻","제이드 — 옥"],["첫 글자","J → jade pendant"],["만드는 방식","J 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/dfc4abcdfccb3ce6.jpg","label":"시그니처"}]},{"key":"iris","brand":"Irisae","kind":"로마자 · 획","group":"로마자","ko":"시그니처","tagline":"플라워 클래스","detail":[["업종","플라워 클래스"],["상호 뜻","아이리스 — 붓꽃"],["첫 글자","I → iris flower"],["만드는 방식","I 에 사물을 겹침"],["표기","로마자"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/5704ad9046f1e090.jpg","label":"시그니처"}]},{"key":"uri","brand":"Uri","kind":"로마자 · 속공간","group":"로마자","ko":"시그니처","tagline":"동네 공유 부엌","detail":[["업종","동네 공유 부엌"],["상호 뜻","우리 — 함께"],["첫 글자","U → two cupped hands"],["만드는 방식","U 에 사물을 앉힘"],["표기","로마자"],["아래 문구","같이 차리는 저녁"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/3808d1a123ba891d.jpg","label":"시그니처"}]},{"key":"raon","brand":"라온","kind":"한글 · 획","group":"한글","ko":"시그니처","tagline":"선물 포장 · 파티","detail":[["업종","선물 포장 · 파티"],["상호 뜻","라온 — 즐거운"],["첫 글자","ㄹ → ribbon bow"],["만드는 방식","ㄹ 에 사물을 겹침"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/dc01b342ad54417a.jpg","label":"시그니처"}]},{"key":"jieum","brand":"지음","kind":"한글 · 획","group":"한글","ko":"시그니처","tagline":"집수리 · 인테리어","detail":[["업종","집수리 · 인테리어"],["상호 뜻","지음 — 짓다"],["첫 글자","ㅈ → house roof"],["만드는 방식","ㅈ 에 사물을 겹침"],["표기","한글"],["아래 문구","사는 집을 고칩니다"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/67fa62347bf876b4.jpg","label":"시그니처"}]},{"key":"bomddeul","brand":"봄뜰","kind":"한글 · 속공간","group":"한글","ko":"시그니처","tagline":"동네 꽃집","detail":[["업종","동네 꽃집"],["상호 뜻","봄뜰 — 봄의 뜰"],["첫 글자","ㅂ → flower pot"],["만드는 방식","ㅂ 에 사물을 앉힘"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/d89b03ae3d7f0a78.jpg","label":"시그니처"}]},{"key":"neoul","brand":"너울","kind":"한글 · 획","group":"한글","ko":"시그니처","tagline":"바닷가 게스트하우스","detail":[["업종","바닷가 게스트하우스"],["상호 뜻","너울 — 큰 물결"],["첫 글자","ㄴ → rolling swell"],["만드는 방식","ㄴ 에 사물을 겹침"],["표기","한글"],["드리는 파일","투명 PNG · 벡터 SVG · 인쇄용 PDF"]],"shots":[{"src":"img/72bce70f1ff91c69.jpg","label":"시그니처"}]}], CARDS = [{"key":"dental","brand":"소나무치과","kind":"치과","group":"의료·건강","tagline":"오래 쓰는 치아를 만듭니다","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #30A0B0 · 명함 바탕 #2E4557"],["본문 명암비","9.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/b9559f84b690dbd0.jpg","label":"실물 목업"},{"src":"img/168a52922c5d8fdf.jpg","label":"실제 놓였을 때"},{"src":"img/572b3273121a0c35.jpg","label":"앞면"},{"src":"img/7461870cb82b8658.jpg","label":"뒷면"}]},{"key":"cafe","brand":"라온 커피로스터스","kind":"카페","group":"음식·카페","tagline":"매일 볶는 싱글오리진","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #D07050 · 명함 바탕 #B98A72"],["본문 명암비","5.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/fa81b525309195f6.jpg","label":"실물 목업"},{"src":"img/8c220c9fc1c74dfa.jpg","label":"실제 놓였을 때"},{"src":"img/7c25e499d6864c34.jpg","label":"앞면"},{"src":"img/88dc83a2cfc52fc5.jpg","label":"뒷면"}]},{"key":"law","brand":"법무법인 정도","kind":"법무법인","group":"전문직·물류","tagline":"기업 자문 · 지식재산","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #C0A040 · 명함 바탕 #0C0C0E"],["본문 명암비","17.3 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/dc13708c259f6b90.jpg","label":"실물 목업"},{"src":"img/b547c7c1bb8e6be5.jpg","label":"실제 놓였을 때"},{"src":"img/fda041c5c3f274fe.jpg","label":"앞면"},{"src":"img/fef7411079e8c7ee.jpg","label":"뒷면"}]},{"key":"game","brand":"스튜디오 코발트","kind":"게임 스튜디오","group":"스튜디오·IT","tagline":"인디 게임 기획 · 개발","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #5040E0 · 명함 바탕 #3A4468"],["본문 명암비","9.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/62f04a6cdb87668b.jpg","label":"실물 목업"},{"src":"img/3cd576e6c2383a96.jpg","label":"실제 놓였을 때"},{"src":"img/2435c1b44b9aee04.jpg","label":"앞면"},{"src":"img/23fdb54c4002f198.jpg","label":"뒷면"}]},{"key":"craft","brand":"목요일 공방","kind":"목공방","group":"공방·제작","tagline":"원목 가구 제작 · 수리","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #C08010 · 명함 바탕 #8D9375"],["본문 명암비","5.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/a0cfbd4280b0f8ef.jpg","label":"실물 목업"},{"src":"img/59254bec5e6c6f53.jpg","label":"실제 놓였을 때"},{"src":"img/c95a13287f588b61.jpg","label":"앞면"},{"src":"img/f4127bec54992051.jpg","label":"뒷면"}]},{"key":"studio_photo","brand":"여백 스튜디오","kind":"사진 스튜디오","group":"스튜디오·IT","tagline":"인물 · 제품 촬영","size":"90 × 50 mm","detail":[["로고 종류","워드타입"],["색","로고 #404040 · 명함 바탕 #131313"],["본문 명암비","17.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"워드타입","shots":[{"src":"img/5eda94576ba32123.jpg","label":"실물 목업"},{"src":"img/09c6df0b2ab5b513.jpg","label":"실제 놓였을 때"},{"src":"img/e8fa288ab0e81a9c.jpg","label":"앞면"},{"src":"img/956fe397cf4568a1.jpg","label":"뒷면"}]},{"key":"skin","brand":"결 피부과의원","kind":"피부과","group":"의료·건강","tagline":"피부 관리 · 레이저","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #E090A0 · 명함 바탕 #FFFCFD"],["본문 명암비","16.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/d27f69389d144b90.jpg","label":"실물 목업"},{"src":"img/e1225a164857c33d.jpg","label":"실제 놓였을 때"},{"src":"img/fdb81bafbc1b3fde.jpg","label":"앞면"},{"src":"img/82001dbc09ab22c2.jpg","label":"뒷면"}]},{"key":"realty","brand":"터전 공인중개사","kind":"부동산","group":"전문직·물류","tagline":"아파트 · 상가 · 토지","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #008090 · 명함 바탕 #3A4468"],["본문 명암비","9.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/54c3a5e566f2da81.jpg","label":"실물 목업"},{"src":"img/b3fedff556a0a2ae.jpg","label":"실제 놓였을 때"},{"src":"img/24b0430c85a1c0f5.jpg","label":"앞면"},{"src":"img/34f6d5a65fca4c6a.jpg","label":"뒷면"}]},{"key":"academy","brand":"한결 수학학원","kind":"교육","group":"교육·문화","tagline":"중등 · 고등 수학","size":"50 × 90 mm 세로","detail":[["로고 종류","캐릭터"],["색","로고 #70B070 · 명함 바탕 #0F1A14"],["본문 명암비","15.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","50 × 90 mm 세로"]],"ko":"캐릭터","shots":[{"src":"img/d0ede6c1994251dd.jpg","label":"실물 목업"},{"src":"img/82b82c631ef6a675.jpg","label":"실제 놓였을 때"},{"src":"img/2749a19c0bbd6858.jpg","label":"앞면"},{"src":"img/3ec66a1779862dcc.jpg","label":"뒷면"}]},{"key":"gym","brand":"코어 짐","kind":"피트니스","group":"의료·건강","tagline":"1:1 퍼스널 트레이닝","size":"90 × 50 mm","detail":[["로고 종류","워드타입"],["색","로고 #B0D020 · 명함 바탕 #16181A"],["본문 명암비","15.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"워드타입","shots":[{"src":"img/4787b4b9f375b139.jpg","label":"실물 목업"},{"src":"img/1f934e6acb235595.jpg","label":"실제 놓였을 때"},{"src":"img/d787963f93379f79.jpg","label":"앞면"},{"src":"img/476ad031e49be832.jpg","label":"뒷면"}]},{"key":"dining","brand":"온기 한상","kind":"식당","group":"음식·카페","tagline":"제철 한식 · 예약제","size":"60 × 60 mm","detail":[["로고 종류","캐릭터"],["색","로고 #C07050 · 명함 바탕 #1A1411"],["본문 명암비","15.1 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","60 × 60 mm"]],"ko":"캐릭터","shots":[{"src":"img/68f6360aa6a0fc12.jpg","label":"실물 목업"},{"src":"img/70277530d8ed8529.jpg","label":"실제 놓였을 때"},{"src":"img/b1a15da725e2ede7.jpg","label":"앞면"},{"src":"img/39480bbd70c7d5a0.jpg","label":"뒷면"}]},{"key":"vet","brand":"숲길 동물병원","kind":"동물병원","group":"의료·건강","tagline":"내과 · 예방접종","size":"90 × 50 mm","detail":[["로고 종류","캐릭터"],["색","로고 #709070 · 명함 바탕 #F6FAFD"],["본문 명암비","16.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캐릭터","shots":[{"src":"img/fe46fbe916f2dac1.jpg","label":"실물 목업"},{"src":"img/37968316cfc52044.jpg","label":"실제 놓였을 때"},{"src":"img/c3fe05867bd0e659.jpg","label":"앞면"},{"src":"img/58f1c58f267a9b1c.jpg","label":"뒷면"}]},{"key":"tax","brand":"바른 세무회계","kind":"세무회계","group":"전문직·물류","tagline":"법인 · 개인 기장 · 양도","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #2070F0 · 명함 바탕 #F8F9FA"],["본문 명암비","15.7 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/c3340b1cce5c60fe.jpg","label":"실물 목업"},{"src":"img/e5c74fd8828155be.jpg","label":"실제 놓였을 때"},{"src":"img/a28e36096f9b47b1.jpg","label":"앞면"},{"src":"img/381e575d90c7069f.jpg","label":"뒷면"}]},{"key":"salon","brand":"채움 헤어","kind":"헤어살롱","group":"뷰티·반려","tagline":"커트 · 펌 · 클리닉","size":"90 × 50 mm","detail":[["로고 종류","워드타입"],["색","로고 #904070 · 명함 바탕 #8C7488"],["본문 명암비","4.2 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"워드타입","shots":[{"src":"img/83fe032594b0eb45.jpg","label":"실물 목업"},{"src":"img/c0fb309b041c8b53.jpg","label":"실제 놓였을 때"},{"src":"img/3f3ae61aa320584c.jpg","label":"앞면"},{"src":"img/3c344241a566926b.jpg","label":"뒷면"}]},{"key":"flower","brand":"온담 플라워","kind":"플라워샵","group":"뷰티·반려","tagline":"부케 · 정기 구독","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #E090A0 · 명함 바탕 #B98A72"],["본문 명암비","5.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/d102b23a79682858.jpg","label":"실물 목업"},{"src":"img/74172b91839be5cc.jpg","label":"실제 놓였을 때"},{"src":"img/08346fec6e64142a.jpg","label":"앞면"},{"src":"img/5b75da040c7a938e.jpg","label":"뒷면"}]},{"key":"interior","brand":"여백 디자인","kind":"인테리어","group":"스튜디오·IT","tagline":"주거 · 상업 공간 설계","size":"90 × 50 mm","detail":[["로고 종류","워드타입"],["색","로고 #807060 · 명함 바탕 #B98A72"],["본문 명암비","5.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"워드타입","shots":[{"src":"img/1b23fdea51e8d6f3.jpg","label":"실물 목업"},{"src":"img/04e9b359e9cc44f3.jpg","label":"실제 놓였을 때"},{"src":"img/4f720d544578ec3d.jpg","label":"앞면"},{"src":"img/b90f7817640ed67e.jpg","label":"뒷면"}]},{"key":"translate","brand":"말결 번역","kind":"번역·통역","group":"전문직·물류","tagline":"영·일 기술 문서 · 통역","size":"50 × 90 mm 세로","detail":[["로고 종류","심볼형"],["색","로고 #30A0A0 · 명함 바탕 #0C1618"],["본문 명암비","15.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","50 × 90 mm 세로"]],"ko":"심볼형","shots":[{"src":"img/6522b0e8193da879.jpg","label":"실물 목업"},{"src":"img/56aca597f53c51e8.jpg","label":"실제 놓였을 때"},{"src":"img/3e92e14007c79fee.jpg","label":"앞면"},{"src":"img/7153a0b4f238b57a.jpg","label":"뒷면"}]},{"key":"garage","brand":"한길 카센터","kind":"자동차 정비","group":"스튜디오·IT","tagline":"정비 · 검사 대행","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #A0B050 · 명함 바탕 #14170F"],["본문 명암비","15.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/c35ae32d70202078.jpg","label":"실물 목업"},{"src":"img/cf48b3de8db52eaa.jpg","label":"실제 놓였을 때"},{"src":"img/521e8b52cdee6f61.jpg","label":"앞면"},{"src":"img/b219175f1f82a1da.jpg","label":"뒷면"}]},{"key":"bakery","brand":"밀과 뜰","kind":"베이커리","group":"음식·카페","tagline":"당일 구움 · 천연 발효","size":"90 × 50 mm","detail":[["로고 종류","캐릭터"],["색","로고 #D09050 · 명함 바탕 #FFFDF9"],["본문 명암비","14.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캐릭터","shots":[{"src":"img/0f1c0eaf2c503b37.jpg","label":"실물 목업"},{"src":"img/49e25e5baf9d5ac5.jpg","label":"실제 놓였을 때"},{"src":"img/e52e2abe370afdf0.jpg","label":"앞면"},{"src":"img/32902cbe5a4ded32.jpg","label":"뒷면"}]},{"key":"counsel","brand":"마음결 상담센터","kind":"심리상담","group":"의료·건강","tagline":"개인 · 부부 상담","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #8070C0 · 명함 바탕 #6FA6AD"],["본문 명암비","6.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/9a69315fbe0a9eae.jpg","label":"실물 목업"},{"src":"img/1e0553cadb52cb3d.jpg","label":"실제 놓였을 때"},{"src":"img/bfc8f2f8dcb76652.jpg","label":"앞면"},{"src":"img/4ac767807f18666b.jpg","label":"뒷면"}]},{"key":"soft","brand":"넥스트폼","kind":"소프트웨어","group":"스튜디오·IT","tagline":"기업용 업무 소프트웨어","size":"90 × 50 mm","detail":[["로고 종류","기업형"],["색","로고 #6050E0 · 명함 바탕 #F8F7FC"],["본문 명암비","16.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"기업형","shots":[{"src":"img/186c7b25ed6acfff.jpg","label":"실물 목업"},{"src":"img/70eb831501d3272b.jpg","label":"실제 놓였을 때"},{"src":"img/832bb6b55368e666.jpg","label":"앞면"},{"src":"img/d58919bff6bc70cf.jpg","label":"뒷면"}]},{"key":"precision","brand":"대성정밀","kind":"정밀가공","group":"공방·제작","tagline":"금형 · 정밀 부품 가공","size":"90 × 50 mm","detail":[["로고 종류","기업형"],["색","로고 #007080 · 명함 바탕 #6FA6AD"],["본문 명암비","6.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"기업형","shots":[{"src":"img/ade69092bffab352.jpg","label":"실물 목업"},{"src":"img/38ee4435e0b4d173.jpg","label":"실제 놓였을 때"},{"src":"img/8b7c4559b1228b29.jpg","label":"앞면"},{"src":"img/1dcc76c3dea1ada6.jpg","label":"뒷면"}]},{"key":"logis","brand":"한결물류","kind":"물류","group":"전문직·물류","tagline":"전국 당일 · 새벽 배송","size":"90 × 50 mm","detail":[["로고 종류","기업형"],["색","로고 #0040B0 · 명함 바탕 #F7F9FB"],["본문 명암비","16.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"기업형","shots":[{"src":"img/79b2910d6ce6e260.jpg","label":"실물 목업"},{"src":"img/6c996983beb12701.jpg","label":"실제 놓였을 때"},{"src":"img/0360c946355a9e15.jpg","label":"앞면"},{"src":"img/a50d54a53af34122.jpg","label":"뒷면"}]},{"key":"engtech","brand":"코어테크","kind":"엔지니어링","group":"공방·제작","tagline":"설비 설계 · 시공 감리","size":"90 × 50 mm","detail":[["로고 종류","기업형"],["색","로고 #3090F0 · 명함 바탕 #0E1726"],["본문 명암비","16.4 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"기업형","shots":[{"src":"img/cee574a3c9c66a83.jpg","label":"실물 목업"},{"src":"img/08125f190b896402.jpg","label":"실제 놓였을 때"},{"src":"img/c9c476d64a502b66.jpg","label":"앞면"},{"src":"img/25b65976e77499d0.jpg","label":"뒷면"}]},{"key":"atelier","brand":"담다 아뜰리에","kind":"공예 아뜰리에","group":"공방·제작","tagline":"도자 · 유리 소품 제작","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #B06030 · 명함 바탕 #FAF8F4"],["본문 명암비","16.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/cca2e9c8a22b8e8a.jpg","label":"실물 목업"},{"src":"img/50ad3f2b124b545d.jpg","label":"실제 놓였을 때"},{"src":"img/c057ad68dbc93206.jpg","label":"앞면"},{"src":"img/7972d239c10f48ff.jpg","label":"뒷면"}]},{"key":"objet","brand":"오브제 랩","kind":"제품 디자인","group":"공방·제작","tagline":"생활 소품 · 가구 설계","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #908070 · 명함 바탕 #FBF9F5"],["본문 명암비","15.8 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/770c4b1511ad9664.jpg","label":"실물 목업"},{"src":"img/14cf357be4b7dfc6.jpg","label":"실제 놓였을 때"},{"src":"img/a95caea2bbdb3031.jpg","label":"앞면"},{"src":"img/49d485c496d9ffe7.jpg","label":"뒷면"}]},{"key":"space","brand":"서리 디자인","kind":"공간 디자인","group":"스튜디오·IT","tagline":"상업 공간 브랜딩 설계","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #908060 · 명함 바탕 #8A6C5C"],["본문 명암비","4.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/87e5ac55f291135b.jpg","label":"실물 목업"},{"src":"img/2c92f6d65d1927f0.jpg","label":"실제 놓였을 때"},{"src":"img/a11041275b3c5d99.jpg","label":"앞면"},{"src":"img/88e1f2f5457b735a.jpg","label":"뒷면"}]},{"key":"photo_min","brand":"무영 스튜디오","kind":"필름 스튜디오","group":"스튜디오·IT","tagline":"필름 인물 · 웨딩 촬영","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #6090A0 · 명함 바탕 #FBFDFD"],["본문 명암비","16.2 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/592ceeb3855db567.jpg","label":"실물 목업"},{"src":"img/25bf7641b5da625c.jpg","label":"실제 놓였을 때"},{"src":"img/b2525d9b2d0eb4d8.jpg","label":"앞면"},{"src":"img/02d6d309351510a7.jpg","label":"뒷면"}]},{"key":"tteok","brand":"고운 떡집","kind":"떡집","group":"음식·카페","tagline":"매일 아침 찌는 떡","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #D09040 · 명함 바탕 #C4A778"],["본문 명암비","7.8 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/956e8b074bf505c4.jpg","label":"실물 목업"},{"src":"img/64fb1f8c540e195d.jpg","label":"실제 놓였을 때"},{"src":"img/58708ea0a8569b8e.jpg","label":"앞면"},{"src":"img/760b0c781779a1bc.jpg","label":"뒷면"}]},{"key":"tea","brand":"다연 찻집","kind":"전통 찻집","group":"음식·카페","tagline":"덖음차 · 계절 다과","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #305040 · 명함 바탕 #B3B798"],["본문 명암비","7.8 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/751295e5f713bda2.jpg","label":"실물 목업"},{"src":"img/aa7d6e1b6e73833c.jpg","label":"실제 놓였을 때"},{"src":"img/4b9a9b29ea622b8d.jpg","label":"앞면"},{"src":"img/0f1c3eeb244900aa.jpg","label":"뒷면"}]},{"key":"gukbap","brand":"손맛 국밥","kind":"한식","group":"음식·카페","tagline":"24시간 끓이는 사골","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #D07040 · 명함 바탕 #191614"],["본문 명암비","15.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/ead798005341fc02.jpg","label":"실물 목업"},{"src":"img/7119c091fde64a12.jpg","label":"실제 놓였을 때"},{"src":"img/669a7aac00352ebb.jpg","label":"앞면"},{"src":"img/71a0f60fa6a2d8e8.jpg","label":"뒷면"}]},{"key":"sool","brand":"밤톨 주막","kind":"전통주점","group":"음식·카페","tagline":"전통주 · 안주 한 상","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #303030 · 명함 바탕 #131313"],["본문 명암비","17.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/7372b2ec19e42dac.jpg","label":"실물 목업"},{"src":"img/9a27832966e31a4c.jpg","label":"실제 놓였을 때"},{"src":"img/2aac55a3c7426f4c.jpg","label":"앞면"},{"src":"img/ab610e98db482bf1.jpg","label":"뒷면"}]},{"key":"optic","brand":"또렷 안경원","kind":"안경원","group":"의료·건강","tagline":"검안 · 렌즈 · 수리","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #3080E0 · 명함 바탕 #FCFBFE"],["본문 명암비","16.4 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/0e050481bf5dd47b.jpg","label":"실물 목업"},{"src":"img/0e5cc8db0748ca3c.jpg","label":"실제 놓였을 때"},{"src":"img/4236cf942e0e9eef.jpg","label":"앞면"},{"src":"img/3b25d9ca81867867.jpg","label":"뒷면"}]},{"key":"bike","brand":"바퀴살","kind":"자전거","group":"스튜디오·IT","tagline":"로드 · MTB 정비","size":"90 × 50 mm","detail":[["로고 종류","엠블럼"],["색","로고 #C0E020 · 명함 바탕 #121212"],["본문 명암비","17.0 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"엠블럼","shots":[{"src":"img/87f7077bff16ecc1.jpg","label":"실물 목업"},{"src":"img/f6331e3b91c98bb4.jpg","label":"실제 놓였을 때"},{"src":"img/0804981fa42abfd1.jpg","label":"앞면"},{"src":"img/9c485afbafb0fd42.jpg","label":"뒷면"}]},{"key":"wine","brand":"저녁의 잔","kind":"와인바","group":"음식·카페","tagline":"내추럴 와인 · 페어링","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #B05050 · 명함 바탕 #8A5F63"],["본문 명암비","5.1 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/17dcd696e8b8879a.jpg","label":"실물 목업"},{"src":"img/e2b09c0cc5ce9a25.jpg","label":"실제 놓였을 때"},{"src":"img/165d3d083af90d5a.jpg","label":"앞면"},{"src":"img/fa33624e377cc7b4.jpg","label":"뒷면"}]},{"key":"pilates","brand":"결 필라테스","kind":"필라테스","group":"의료·건강","tagline":"1:1 리포머 · 소도구","size":"90 × 50 mm","detail":[["로고 종류","라인 일러스트"],["색","로고 #E080A0 · 명함 바탕 #A6BAA0"],["본문 명암비","7.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"라인 일러스트","shots":[{"src":"img/47ab10e1540a3432.jpg","label":"실물 목업"},{"src":"img/6bfb2e06da64ee95.jpg","label":"실제 놓였을 때"},{"src":"img/df0c146e74600858.jpg","label":"앞면"},{"src":"img/9ed20fab9c9a33d1.jpg","label":"뒷면"}]},{"key":"laundry","brand":"말끔 세탁","kind":"세탁","group":"전문직·물류","tagline":"드라이 · 수선 · 운동화","size":"90 × 50 mm","detail":[["로고 종류","심볼형"],["색","로고 #408090 · 명함 바탕 #F5FAFA"],["본문 명암비","16.1 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"심볼형","shots":[{"src":"img/536b4b22395af501.jpg","label":"실물 목업"},{"src":"img/309eb5ed3db9d53e.jpg","label":"실제 놓였을 때"},{"src":"img/6eaa5943df5ac3cc.jpg","label":"앞면"},{"src":"img/e0eda2ebc8797391.jpg","label":"뒷면"}]},{"key":"book","brand":"낮은 서가","kind":"독립서점","group":"교육·문화","tagline":"문학 · 에세이 · 소규모 출판","size":"90 × 50 mm","detail":[["로고 종류","미니멀 레터마크"],["색","로고 #A08050 · 명함 바탕 #FBF8F2"],["본문 명암비","15.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"미니멀 레터마크","shots":[{"src":"img/f8a4b7b0b1afe10a.jpg","label":"실물 목업"},{"src":"img/69c1e053e39d4ffb.jpg","label":"실제 놓였을 때"},{"src":"img/c42d1b9d425e8826.jpg","label":"앞면"},{"src":"img/46787d3d8be3b00c.jpg","label":"뒷면"}]},{"key":"music","brand":"소리결 음악학원","kind":"음악학원","group":"교육·문화","tagline":"피아노 · 보컬 · 작곡","size":"90 × 50 mm","detail":[["로고 종류","캐릭터"],["색","로고 #904070 · 명함 바탕 #8C7488"],["본문 명암비","4.2 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캐릭터","shots":[{"src":"img/7ea2b5dead48a85b.jpg","label":"실물 목업"},{"src":"img/e18d322f7ea500d0.jpg","label":"실제 놓였을 때"},{"src":"img/ded1beb42190874c.jpg","label":"앞면"},{"src":"img/e65513b35bf1c301.jpg","label":"뒷면"}]},{"key":"farm","brand":"들녘 농장","kind":"농산물","group":"음식·카페","tagline":"제철 채소 · 꾸러미 배송","size":"90 × 50 mm","detail":[["로고 종류","캘리그라피"],["색","로고 #708040 · 명함 바탕 #8D9375"],["본문 명암비","5.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"캘리그라피","shots":[{"src":"img/88e617875f67afd6.jpg","label":"실물 목업"},{"src":"img/08bc234e023426b3.jpg","label":"실제 놓였을 때"},{"src":"img/b393d8b098e198f6.jpg","label":"앞면"},{"src":"img/77364257318a3882.jpg","label":"뒷면"}]},{"key":"clinic","brand":"온담 한의원","kind":"한의원","group":"의료·건강","tagline":"침 · 추나 · 한약","size":"50 × 90 mm 세로","detail":[["로고 종류","캘리그라피"],["색","로고 #608060 · 명함 바탕 #5F7958"],["본문 명암비","4.6 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","50 × 90 mm 세로"]],"ko":"캘리그라피","shots":[{"src":"img/b6ac34b9f07c3cff.jpg","label":"실물 목업"},{"src":"img/fbe0e01138b10617.jpg","label":"실제 놓였을 때"},{"src":"img/29d8f8be625f20a1.jpg","label":"앞면"},{"src":"img/29e179a8c9b9df91.jpg","label":"뒷면"}]},{"key":"appsoft","brand":"이음소프트","kind":"소프트웨어","group":"스튜디오·IT","tagline":"협업 도구 · 사내 업무 앱","size":"90 × 50 mm","detail":[["로고 종류","앱아이콘"],["본문 명암비","16.9 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"앱아이콘","shots":[{"src":"img/61c82fa09ed9fa41.jpg","label":"실물 목업"},{"src":"img/60a8092adeac5dc8.jpg","label":"실제 놓였을 때"},{"src":"img/d79e444228c93cf6.jpg","label":"앞면"},{"src":"img/38a8d88c4d34b9d3.jpg","label":"뒷면"}]},{"key":"appedu","brand":"포근돌담학원","kind":"학원","group":"교육·문화","tagline":"초·중등 수학 · 개별 진도","size":"90 × 50 mm","detail":[["로고 종류","앱아이콘"],["본문 명암비","16.5 : 1  (WCAG AA 4.5 이상)"],["드리는 파일","벡터 원본 AI · EPS · PDF · SVG · 배경 투명 PNG · 명함 인쇄용 PDF (300dpi · CMYK · 재단선)"],["판형","90 × 50 mm"]],"ko":"앱아이콘","shots":[{"src":"img/344c58f26e8c61a0.jpg","label":"실물 목업"},{"src":"img/6829fa7cafc99f83.jpg","label":"실제 놓였을 때"},{"src":"img/d1b60c9751edc7a8.jpg","label":"앞면"},{"src":"img/d92c80a63dbaaa15.jpg","label":"뒷면"}]}];
+var BUCKET = {logo: LOGOS, card: CARDS};
+var group = {logo: 'ALL', card: 'ALL'};
+function $(id){ return document.getElementById(id); }
+
+function draw(kind){
+  var all = BUCKET[kind];
+  // 로고는 종류(ko), 명함은 업종(group), 시그니처는 표기(ko) 로 거른다.
+  var field = kind === 'card' ? 'group' : 'ko';
+  var rows = group[kind] === 'ALL' ? all
+    : all.filter(function(s){ return s[field] === group[kind]; });
+  var g = $('grid-' + kind);
+  g.innerHTML = '';
+  rows.forEach(function(s){
+    var b = document.createElement('button');
+    b.className = 'cell rv'; b.type = 'button';
+    b.innerHTML = '<div class="pic"></div><b></b><small></small>';
+    var im = new Image();
+    im.src = s.shots[0].src; im.alt = s.brand; im.loading = 'lazy';
+    b.querySelector('.pic').appendChild(im);
+    b.querySelector('b').textContent = s.brand;
+    b.querySelector('small').textContent =
+      kind === 'card' ? s.kind : (s.ko || s.kind);
+    b.onclick = function(){ open_(kind, s.key); };
+    g.appendChild(b);
+  });
+  $('n-' + kind).textContent = rows.length + KOUNT;
+  if (typeof watch === 'function') watch(g);
+}
+
+function open_(kind, key){
+  var s = null, i;
+  for (i = 0; i < BUCKET[kind].length; i++)
+    if (BUCKET[kind][i].key === key) s = BUCKET[kind][i];
+  if (!s) return;
+  $('d-title').textContent = s.brand;
+  $('d-sub').textContent = s.tagline || '';
+  $('d-kind').textContent =
+    (kind === 'logo' ? KLOGO : kind === 'card' ? KCARD : KSIGN)
+    + ' \u00b7 ' + s.kind;
+  var box = $('d-shots'); box.innerHTML = '';
+  s.shots.forEach(function(sh){
+    var w = document.createElement('div');
+    var f = document.createElement('div'); f.className = 'shot';
+    var im = new Image(); im.src = sh.src; im.alt = s.brand;
+    f.appendChild(im);
+    var c = document.createElement('p'); c.className = 'cap';
+    c.textContent = sh.label;
+    w.appendChild(f); w.appendChild(c); box.appendChild(w);
+  });
+  var sp = $('d-spec'); sp.innerHTML = '';
+  (s.detail || []).forEach(function(pair){
+    var dt = document.createElement('dt'); dt.textContent = pair[0];
+    var dd = document.createElement('dd');
+    (String(pair[1]).match(/#[0-9A-Fa-f]{6}/g) || []).forEach(function(h){
+      var w2 = document.createElement('span');
+      w2.className = 'sw'; w2.style.background = h; dd.appendChild(w2);
+    });
+    dd.appendChild(document.createTextNode(pair[1]));
+    sp.appendChild(dt); sp.appendChild(dd);
+  });
+  CUR.kind = kind; CUR.key = key;
+  var rows = shown(kind), at = 0;
+  for (var n = 0; n < rows.length; n++) if (rows[n].key === key) at = n;
+  $('d-at').textContent = (at + 1) + ' / ' + rows.length;
+  $('d-prev').disabled = at === 0;
+  $('d-next').disabled = at >= rows.length - 1;
+  document.body.classList.add('on-detail');
+  scrollTo(0, 0);
+  history.pushState({kind: kind, key: key}, '', '#' + kind + '-' + key);
+}
+
+$('d-back').onclick = function(){
+  document.body.classList.remove('on-detail');
+  history.pushState({}, '', '#browse');
+};
+addEventListener('popstate', function(e){
+  var st = e.state || {};
+  if (st.key) open_(st.kind, st.key);
+  else document.body.classList.remove('on-detail');
+});
+[].slice.call(document.querySelectorAll('.f')).forEach(function(t){
+  t.onclick = function(){
+    var kind = t.dataset.k;
+    [].slice.call(document.querySelectorAll('.f[data-k="' + kind + '"]'))
+      .forEach(function(x){ x.setAttribute('aria-pressed', String(x === t)); });
+    group[kind] = t.dataset.g;
+    draw(kind);
+  };
+});
+var marks = [].slice.call(document.querySelectorAll('.nav a'));
+var secs = marks.map(function(a){
+  return document.querySelector(a.getAttribute('href')); });
+addEventListener('scroll', function(){
+  if (document.body.classList.contains('on-detail')) return;
+  var y = scrollY + 130, at = 0;
+  secs.forEach(function(el, n){ if (el && el.offsetTop <= y) at = n; });
+  marks.forEach(function(a, n){ a.classList.toggle('on', n === at); });
+}, {passive: true});
+
+// 상세에서 옆으로. 지금 보고 있는 목록(= 걸린 필터)을 그대로 따라간다.
+// ⚠ 전체 목록을 따라가면 안 된다. '캐릭터'만 걸러 보다가 다음을 눌렀는데
+//   엠블럼이 나오면 필터가 무슨 소용인가.
+var CUR = {kind: '', key: ''};
+function shown(kind){
+  var field = kind === 'card' ? 'group' : 'ko';
+  return group[kind] === 'ALL' ? BUCKET[kind]
+    : BUCKET[kind].filter(function(s){ return s[field] === group[kind]; });
+}
+function step(d){
+  var rows = shown(CUR.kind), i = -1, n;
+  for (n = 0; n < rows.length; n++) if (rows[n].key === CUR.key) i = n;
+  if (i < 0) return;
+  var j = i + d;
+  if (j < 0 || j >= rows.length) return;
+  open_(CUR.kind, rows[j].key);
+}
+$('d-prev').onclick = function(){ step(-1); };
+$('d-next').onclick = function(){ step(1); };
+addEventListener('keydown', function(e){
+  if (!document.body.classList.contains('on-detail')) return;
+  if (e.key === 'ArrowLeft') step(-1);
+  else if (e.key === 'ArrowRight') step(1);
+  else if (e.key === 'Escape') $('d-back').onclick();
+});
+
+// 스크롤 진입. 한 번 보이면 그대로 두고 관찰을 끊는다 —
+// 위로 다시 스크롤할 때 또 사라졌다 나타나면 눈이 피곤하다.
+var RV = new IntersectionObserver(function(es){
+  es.forEach(function(e){
+    if (e.isIntersecting){ e.target.classList.add('in'); RV.unobserve(e.target); }
+  });
+}, {rootMargin: '0px 0px -8% 0px', threshold: 0.06});
+function watch(root){
+  [].slice.call((root || document).querySelectorAll('.rv:not(.in)'))
+    .forEach(function(el){ RV.observe(el); });
+}
+watch();
+
+draw('logo'); draw('card');
+(function(){
+  var m = (location.hash || '').match(/^#(logo|card)-(.+)$/);
+  if (m) open_(m[1], m[2]);
+})();
+
+</script>
+</body></html>
